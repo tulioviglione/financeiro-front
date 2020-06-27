@@ -2,11 +2,10 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
 import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
-import { NewUser } from './new-user';
 import { SignUpService } from './signup.serice';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
+import { Usuario } from 'src/app/core/model/usuario.model';
 
 @Component({
   selector: 'app-signup',
@@ -33,22 +32,18 @@ export class SignUpComponent implements OnInit {
           Validators.email
         ]
       ],
-      fullName: ['', 
-        [
-          Validators.required,
-          lowerCaseValidator,
-          Validators.minLength(2),
-          Validators.maxLength(40)
-        ]
+      nome: ['',[] 
       ],
-      userName: ['', 
+      sobrenome: ['', []
+      ],
+      login: ['', 
       [
         Validators.required,
         Validators.pattern(/^[a-z0-9_\-]+$/),
         Validators.minLength(2),
-        Validators.maxLength(30)
+        Validators.maxLength(30),
+        this.userNotTakenValidatorService.checkUserNameTaken()
       ],
-      this.userNotTakenValidatorService.checkUserNameTaken()
     ],
       password: ['', 
       [
@@ -63,7 +58,7 @@ export class SignUpComponent implements OnInit {
   }
 
   signup() {
-    const newUser = this.signupForm.getRawValue() as NewUser;
+    const newUser = this.signupForm.getRawValue() as Usuario;
     this.signUpService
         .signup(newUser)
         .subscribe(

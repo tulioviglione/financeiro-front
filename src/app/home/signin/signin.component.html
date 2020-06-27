@@ -6,11 +6,11 @@
         <input #userNameInput
             formControlName="userName"
             class="form-control" 
-            placeholder="user name" 
+            placeholder="usuario" 
             autofocus>  
         <app-vmessage
             *ngIf="loginForm.get('userName').errors?.required"
-            text="User name is required!">
+            text="Obrigatorio informar o usuário!">
         </app-vmessage>
     </div>
 
@@ -18,19 +18,19 @@
         <input formControlName="password"
             type="password" 
             class="form-control" 
-            placeholder="password">
+            placeholder="senha">
             <app-vmessage
             *ngIf="loginForm.get('userName').errors?.required"
-            text="password is required!">
+            text="Obrigatóio infomar a senha!">
         </app-vmessage>              
     </div>
 
     <button [disabled]="loginForm.invalid"
         type="submit" 
         class="btn btn-primary btn-block">
-        login
+        Acessar
     </button>
 
 </form>
 
-<p>Not a user? <a [routerLink]="['signup']">Register now</a></p>
+<p>Primeiro acesso? <a [routerLink]="['signup']">Crie um usuário gratuito</a></p>
