@@ -6,7 +6,7 @@ import { UserService } from '../user/user.service';
 import { User } from '../user/user';
 
 @Component({
-    selector: 'an-header',
+    selector: 'app-header',
     templateUrl: './header.component.html'
 })
 export class HeaderComponent{ 
