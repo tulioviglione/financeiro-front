@@ -42,8 +42,8 @@ export class SignUpComponent implements OnInit {
         Validators.pattern(/^[a-z0-9_\-]+$/),
         Validators.minLength(2),
         Validators.maxLength(30),
-        this.userNotTakenValidatorService.checkUserNameTaken()
       ],
+      this.userNotTakenValidatorService.checkUserNameTaken()
     ],
       password: ['', 
       [

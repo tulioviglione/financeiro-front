@@ -8,7 +8,7 @@ import { SignUpService } from './signup.serice';
 export class UserNotTakenValidatorService {
 
     constructor(private signUpService: SignUpService) {}
-    
+
     checkUserNameTaken() {
 
         return (control: AbstractControl) => {
@@ -18,9 +18,8 @@ export class UserNotTakenValidatorService {
                 .pipe(switchMap(userName =>
                     this.signUpService.checkUserNameTaken(userName)
                 ))
-                .pipe(map(isTaken => {
-                    isTaken['data'] ?  null  : null
-                })).pipe(first());
-        }
+                .pipe(map(isTaken => isTaken['data'] ? { userNameTaken: true } : null))
+                .pipe(first());
+    }
     }
 }
