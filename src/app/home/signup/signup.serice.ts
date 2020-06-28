@@ -14,6 +14,10 @@ export class SignUpService {
         return this.http.get(environment.API_URL + '/auth/usuarios/validaUsuario/' + userName);
     }
 
+    checkEmailTaken(email: string) {
+        return this.http.get(environment.API_URL + '/auth/usuarios/validaEmail/' + email);
+    }
+
     signup(newUser: Usuario) {
         return this.http.post(environment.API_URL + '/auth/usuarios', newUser);
     }

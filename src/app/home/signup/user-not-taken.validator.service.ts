@@ -22,4 +22,18 @@ export class UserNotTakenValidatorService {
                 .pipe(first());
     }
     }
+
+    checkEmailTaken() {
+
+        return (control: AbstractControl) => {
+            return control
+                .valueChanges
+                .pipe(debounceTime(300))
+                .pipe(switchMap(userName =>
+                    this.signUpService.checkEmailTaken(userName)
+                ))
+                .pipe(map(isTaken => isTaken['data'] ? { emailTaken: true } : null))
+                .pipe(first());
+    }
+    }
 }

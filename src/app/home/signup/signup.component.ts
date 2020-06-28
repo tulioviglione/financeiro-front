@@ -30,7 +30,8 @@ export class SignUpComponent implements OnInit {
         [
           Validators.required,
           Validators.email
-        ]
+        ],
+        this.userNotTakenValidatorService.checkEmailTaken()
       ],
       nome: ['',[] 
       ],

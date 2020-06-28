@@ -11,6 +11,11 @@
             *ngIf="signupForm.get('email').errors?.email"
             text="e-mail inválido">
         </app-vmessage>
+        <app-vmessage
+            text="E-mail já cadastrado"
+            *ngIf="signupForm.get('email').errors?.emailTaken">
+        </app-vmessage>
+        <small *ngIf="signupForm.get('email').valid" class="text-success">E-mail válido</small>
     </div>
 
     <div class="form-group">
