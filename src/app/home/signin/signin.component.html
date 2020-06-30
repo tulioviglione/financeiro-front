@@ -1,36 +1,20 @@
-<h4 class="text-center">Login</h4>
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="login()">
+            <mat-form-field>
+                <input type="text" matInput placeholder="E-mail" formControlName="email">
+                <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="password" matInput placeholder="Senha" formControlName="senha">
+                <mat-error *ngIf="senha.invalid">{{getSenhaErrorMessage()}}</mat-error>
+            </mat-form-field>
+        
+            <div class="button">
+                <button [disabled]="form.invalid" type="submit" mat-button>Acessar</button>
+            </div>
 
-<form [formGroup]="loginForm" class="form mt-4" (submit)="login()">
-
-    <div class="form-group">
-        <input #userNameInput
-            formControlName="userName"
-            class="form-control" 
-            placeholder="usuario" 
-            autofocus>  
-        <app-vmessage
-            *ngIf="loginForm.get('userName').errors?.required"
-            text="Obrigatorio informar o usuário!">
-        </app-vmessage>
-    </div>
-
-    <div class="form-group">
-        <input formControlName="password"
-            type="password" 
-            class="form-control" 
-            placeholder="senha">
-            <app-vmessage
-            *ngIf="loginForm.get('userName').errors?.required"
-            text="Obrigatóio infomar a senha!">
-        </app-vmessage>              
-    </div>
-
-    <button [disabled]="loginForm.invalid"
-        type="submit" 
-        class="btn btn-primary btn-block">
-        Acessar
-    </button>
-
-</form>
-
-<p>Primeiro acesso? <a [routerLink]="['signup']">Crie um usuário gratuito</a></p>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -1,15 +1,42 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 
 @Component({
-    templateUrl: './signin.component.html'
+    templateUrl: './signin.component.html',
+    styleUrls: ['./signin.component.css']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
     
+    email = new FormControl('', [Validators.required, Validators.email]);
+    senha = new FormControl('', [Validators.required]);
+    form: FormGroup = new FormGroup({
+        email: this.email,
+        senha: this.senha
+    });
+    
+    login(){
+        if (this.form.valid) {
+            console.log('implementar login');
+        }
+    }
+
+    getEmailErrorMessage() {
+        if (this.email.hasError('required'))
+          return 'Obrigátorio informar o e-mail';
+        return this.email.hasError('email') ? 'E-mail inválido' : '';
+    }
+
+    getSenhaErrorMessage() {
+        if (this.senha.hasError('required'))
+          return 'Obrigátorio informar a senha';
+    }
+
+
+    /*
     loginForm: FormGroup;
     @ViewChild('userNameInput', { static: true }) userNameInput: ElementRef<HTMLInputElement>;
     
@@ -45,4 +72,5 @@ export class SignInComponent implements OnInit {
                 }
             );
     }
+    */
 }
