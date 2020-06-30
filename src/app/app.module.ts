@@ -7,6 +7,7 @@ import { ErrorsModule } from './errors/errors.module';
 import { CoreModule } from './core/core.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
       CoreModule,
       AppRoutingModule,
       HttpClientModule,
-      CommonModule
+      CommonModule,
+      BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
