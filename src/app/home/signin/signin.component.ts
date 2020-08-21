@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -17,10 +18,36 @@ export class SignInComponent {
         email: this.email,
         senha: this.senha
     });
+
+    horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+    verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+    constructor(private snackBar: MatSnackBar,
+        private router: Router,
+        private auth: AuthService) {}
+
+    openSnackBar(alert: string, mensage: string) {
+        this.snackBar.open(alert,mensage , {
+            duration: 1500,
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+        });
+    }
     
     login(){
         if (this.form.valid) {
-            console.log('implementar login');
+            this.openSnackBar('Aguarde!','Validando Acesso');
+            this.auth.authenticate(this.form.get('email').value, this.form.get('senha').value).subscribe(
+                () => {
+                    this.openSnackBar('Autorizado', 'Redirecionando');
+                    this.router.navigate(['user']);
+                },
+                err => {
+                    console.log(err);
+                    this.form.reset();
+                    this.openSnackBar('Não Autorizado', 'Usuário ou senha inválido');
+                }
+            );
         }
     }
 

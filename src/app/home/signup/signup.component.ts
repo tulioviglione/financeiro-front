@@ -46,7 +46,7 @@ export class SignUpComponent implements OnInit {
       ],
       this.userNotTakenValidatorService.checkUserNameTaken()
     ],
-      password: ['', 
+      senha: ['', 
       [
         Validators.required,
         Validators.minLength(8),
