@@ -40,7 +40,7 @@ export class SignInComponent {
             this.auth.authenticate(this.form.get('email').value, this.form.get('senha').value).subscribe(
                 () => {
                     this.openSnackBar('Autorizado', 'Redirecionando');
-                    this.router.navigate(['user']);
+                    this.router.navigate(['initial']);
                 },
                 err => {
                     console.log(err);
