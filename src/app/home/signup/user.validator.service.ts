@@ -5,7 +5,7 @@ import { debounceTime, switchMap, map, first } from 'rxjs/operators';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Injectable()
-export class UserNotTakenValidatorService {
+export class UserValidatorService {
 
     constructor(private userService: UserService) {}
 
@@ -36,4 +36,13 @@ export class UserNotTakenValidatorService {
                 .pipe(first());
     }
     }
+
+    passwordMatchValidator() {
+        return (control: AbstractControl) => {
+            return control.valueChanges.pipe(debounceTime(300))
+            .pipe(map(senhaConf => (senhaConf != control.parent.value['senha']) ? { NoPassswordMatch: true } : null))
+            .pipe(first());
+        }
+    }
+
 }
