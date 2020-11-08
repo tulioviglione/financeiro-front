@@ -4,6 +4,7 @@ import { tap } from 'rxjs/operators';
 
 import { UserService } from '../user/user.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,8 @@ export class AuthService {
 
     constructor(
         private http: HttpClient,
-        private userService: UserService) { }
+        private userService: UserService,
+        private router: Router) { }
 
     authenticate(userName: string, password: string) {
         return this.http
@@ -23,8 +25,7 @@ export class AuthService {
                 { observe: 'response'} )//da acesso a resposta
             .pipe(tap(res => {
                 const authToken = res.body['data']['token'];//nome do cabeçalho onde esta armazenado o token
-                this.userService.setToken(authToken);
-                console.log(`User ${userName} authenticated with token ${authToken}`);
+                this.userService.setToken(authToken);           
             }))
     }
 }

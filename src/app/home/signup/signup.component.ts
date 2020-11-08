@@ -2,15 +2,15 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
-import { SignUpService } from './signup.serice';
+import { UserValidatorService } from './user.validator.service';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 import { Usuario } from 'src/app/core/model/usuario.model';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  providers: [ UserNotTakenValidatorService ]
+  providers: [ UserValidatorService ]
 })
 export class SignUpComponent implements OnInit {
 
@@ -19,8 +19,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userNotTakenValidatorService: UserNotTakenValidatorService,
-    private signUpService: SignUpService,
+    private userValidatorService: UserValidatorService,
+    private userService: UserService,
     private router: Router,
     private platformDetectorService: PlatformDetectorService) { }
 
@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit {
           Validators.required,
           Validators.email
         ],
-        this.userNotTakenValidatorService.checkEmailTaken()
+        this.userValidatorService.checkEmailTaken()
       ],
       nome: ['',[] 
       ],
@@ -44,14 +44,18 @@ export class SignUpComponent implements OnInit {
         Validators.minLength(2),
         Validators.maxLength(30),
       ],
-      this.userNotTakenValidatorService.checkUserNameTaken()
+      this.userValidatorService.checkUserNameTaken()
     ],
       senha: ['', 
       [
+        Validators.required
+      ],
+    ],
+      senhaConf: ['', 
+      [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(14)
-      ]
+      ],
+      this.userValidatorService.passwordMatchValidator()
     ]
     }) 
     this.platformDetectorService.isPlatformBrowser() &&
@@ -60,7 +64,7 @@ export class SignUpComponent implements OnInit {
 
   signup() {
     const newUser = this.signupForm.getRawValue() as Usuario;
-    this.signUpService
+    this.userService
         .signup(newUser)
         .subscribe(
             () => this.router.navigate(['']),

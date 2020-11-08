@@ -8,6 +8,8 @@ import { CoreModule } from './core/core.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from './core/auth/auth.service';
+import { AuthGuard } from './core/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       CommonModule,
       BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
