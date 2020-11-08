@@ -12,8 +12,8 @@ import { SignInComponent } from './signin/signin.component';
 import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
-import { SignUpService } from './signup/signup.serice';
 import { SignUpComponent } from './signup/signup.component';
+import { UserService } from '../core/user/user.service';
 
 @NgModule({
     declarations: [
@@ -35,6 +35,6 @@ import { SignUpComponent } from './signup/signup.component';
         MatFormFieldModule,
         MatSnackBarModule       
      ],
-     providers: [ SignUpService ]
+     providers: [ UserService ]
 })
 export class HomeModule { }

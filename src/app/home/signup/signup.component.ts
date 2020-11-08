@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
-import { SignUpService } from './signup.serice';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 import { Usuario } from 'src/app/core/model/usuario.model';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userNotTakenValidatorService: UserNotTakenValidatorService,
-    private signUpService: SignUpService,
+    private userService: UserService,
     private router: Router,
     private platformDetectorService: PlatformDetectorService) { }
 
@@ -60,7 +60,7 @@ export class SignUpComponent implements OnInit {
 
   signup() {
     const newUser = this.signupForm.getRawValue() as Usuario;
-    this.signUpService
+    this.userService
         .signup(newUser)
         .subscribe(
             () => this.router.navigate(['']),

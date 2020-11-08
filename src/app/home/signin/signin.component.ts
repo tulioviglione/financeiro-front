@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
 
 @Component({
     templateUrl: './signin.component.html',
@@ -43,7 +42,7 @@ export class SignInComponent {
                     this.router.navigate(['initial']);
                 },
                 err => {
-                    console.log(err);
+                    console.error(err);
                     this.form.reset();
                     this.openSnackBar('Não Autorizado', 'Usuário ou senha inválido');
                 }
@@ -61,43 +60,5 @@ export class SignInComponent {
         if (this.senha.hasError('required'))
           return 'Obrigátorio informar a senha';
     }
-
-
-    /*
-    loginForm: FormGroup;
-    @ViewChild('userNameInput', { static: true }) userNameInput: ElementRef<HTMLInputElement>;
     
-    constructor(
-        private formBuilder: FormBuilder,
-        private authService: AuthService,
-        private router: Router,
-        private platformDetectorService: PlatformDetectorService) { }
-    
-    ngOnInit(): void {
-        this.loginForm = this.formBuilder.group({
-            userName: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-        this.platformDetectorService.isPlatformBrowser() &&
-            this.userNameInput.nativeElement.focus();
-    }
-
-    login() {
-        const userName = this.loginForm.get('userName').value;
-        const password = this.loginForm.get('password').value;
-
-        this.authService
-            .authenticate(userName, password)
-            .subscribe(
-                () => this.router.navigate(['user', userName]),
-                err => {
-                    console.log(err);
-                    this.loginForm.reset();
-                    this.platformDetectorService.isPlatformBrowser() &&
-                        this.userNameInput.nativeElement.focus();
-                    alert('Invalid user name or password');
-                }
-            );
-    }
-    */
 }
