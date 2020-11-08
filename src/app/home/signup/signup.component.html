@@ -63,6 +63,18 @@
         </app-vmessage>
     </div>
 
+    <div class="form-group">
+        <input formControlName="senhaConf" type="password" placeholder="senha confirmação" class="form-control">
+        <app-vmessage
+            *ngIf="signupForm.get('senhaConf').errors?.required"
+            text="Obrigatorio informar senha novamente">
+        </app-vmessage>
+        <app-vmessage
+            *ngIf="signupForm.get('senhaConf').errors?.NoPassswordMatch"
+            text="Senhas diferentes">
+        </app-vmessage>        
+    </div>
+
     <button [disabled]="signupForm.invalid  || signupForm.pending" class="btn btn-primary btn-block">Registrar</button>
 
     <p>Usuário já cadastrado? <a [routerLink]="['']">Acessar!</a></p>

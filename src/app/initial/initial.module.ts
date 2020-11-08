@@ -8,18 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { SignInComponent } from './signin/signin.component';
 import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
-import { HomeComponent } from './home.component';
-import { HomeRoutingModule } from './home.routing.module';
-import { SignUpComponent } from './signup/signup.component';
-import { UserService } from '../core/user/user.service';
+import { InitialComponent } from './initial.component';
+
 
 @NgModule({
     declarations: [
-        SignInComponent,
-        SignUpComponent,
-        HomeComponent
+        InitialComponent
     ],
     imports: [
         ReactiveFormsModule,
@@ -27,7 +22,6 @@ import { UserService } from '../core/user/user.service';
         CommonModule,
         VMessageModule,
         RouterModule,
-        HomeRoutingModule,
         MatCardModule,
         MatCardModule,
         MatInputModule,
@@ -35,6 +29,6 @@ import { UserService } from '../core/user/user.service';
         MatFormFieldModule,
         MatSnackBarModule       
      ],
-     providers: [ UserService ]
+     providers: [ ]
 })
-export class HomeModule { }
+export class InitialModule { }
