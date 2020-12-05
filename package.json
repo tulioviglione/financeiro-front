@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "localize": "ng update @angular/core@10 @angular/cli@11"
+    "localize": "ng update @angular/core@11 @angular/cli@11"
   },
   "private": true,
   "dependencies": {
